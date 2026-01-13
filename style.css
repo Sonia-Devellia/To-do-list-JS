@@ -1,0 +1,166 @@
+/* === Style général de la page === */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* === Formulaire === */
+form.d-flex {
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+form input.form-control {
+  flex: 1;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+form button.btn-primary {
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* === Boutons filtre === */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.btn-group .btn {
+  margin: 0 5px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-group .btn.active,
+.btn-group .btn:hover {
+  background-color: #7facee;
+  color: #fff;
+}
+
+/* === Conteneur principal avec deux colonnes === */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* deux colonnes égales */
+  column-gap: 10px; /* mini espace entre les colonnes */
+  width: 100%; /* prend toute la largeur du conteneur */
+  max-width: 1100px;
+  margin: 20px auto 0;
+}
+
+.col-md-6 {
+  width: 100%; /* chaque colonne prend toute sa "case" dans la grille */
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  transition: transform 0.2s;
+}
+
+
+.col-md-6:hover {
+  transform: translateY(-2px);
+}
+
+/* Background léger pour différencier les colonnes */
+#todo-list {
+  background-color: #e4e1e1;
+}
+
+#done-list {
+  background-color: #ecf0f6;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .row {
+    grid-template-columns: 1fr; /* empile les colonnes */
+    column-gap: 0;
+  }
+}
+
+/* === Titres colonnes === */
+.col-md-6 h5 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #5473ee;
+}
+
+/* === Liste des tâches === */
+ul.list-group {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* === Cartes de tâches === */
+ul.list-group li.todo {
+  margin-bottom: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  
+}
+
+/* === Checkbox === */
+.form-check-input {
+  margin-right: 12px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #77a5ea; /* couleur du v */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Laisser pointer sur le label pour cliquer dessus */
+.todo label.form-check-label {
+  flex: 1;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1rem;
+}
+
+/* === Tâches faites === */
+.todo input.form-check-input:checked + label.form-check-label {
+  text-decoration: none;
+  color: #999;
+  opacity: 0.8;
+}
+
+/* === Bouton supprimer === */
+.todo .btn-danger {
+  background-color: #ff6b6b;
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.todo .btn-danger:hover {
+  background-color: #e90e0ebf;
+  transform: scale(1.05);
+}
