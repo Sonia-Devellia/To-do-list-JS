@@ -4,7 +4,7 @@ Ce projet est une **To-Do List** simple réalisée pour pratiquer et appliquer l
 
 Le **HTML** utilisé dans ce projet provient d’un exercice de [Grafikart](https://www.grafikart.fr/) et **n’a pas été écrit par moi**.  
 
-Le **CSS** est minimal et l’objectif **n’était pas de créer un design joli**, mais seulement de rendre l’interface fonctionnelle pour tester le JavaScript.  
+Le **CSS** est minimal  au départ et l’objectif **n’était pas de créer un design joli**, mais seulement de rendre l’interface fonctionnelle pour tester le JavaScript. Il sera mis à jour dans un atre commit 
 
 ## Fonctionnalités
 
