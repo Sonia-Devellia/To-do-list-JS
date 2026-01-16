@@ -3,73 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TodoList</title>
+    <title>Ma Todo List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="style.css" />
-
   </head>
   <body>
-    <section class="container pt-5" id="todolist">
-      <form class="d-flex pb-4">
+    <div class="container">
+      <header class="header">
+        <h1 class="title">Mes tâches</h1>
+        <div class="stats">
+          <span class="stat-item" id="total-count">0 tâches</span>
+          <span class="stat-item" id="done-count">0 faites</span>
+        </div>
+      </header>
+
+      <form class="add-task-form" id="add-form">
         <input
-          required=""
-          class="form-control"
+          required
+          class="task-input"
           type="text"
-          placeholder="Acheter des patates..."
-          name="title"
-          data-com.bitwarden.browser.user-edited="yes"
+          placeholder="Nouvelle tâche..."
+          id="task-input"
         />
-        <button class="btn btn-primary">Ajouter</button>
+        <select class="category-select" id="category-select">
+          <option value="courses">Courses</option>
+          <option value="prevoir">À prévoir</option>
+          <option value="important">Important</option>
+          <option value="oublier">Ne pas oublier</option>
+        </select>
+        <button type="submit" class="add-btn">
+          <i class="fa-solid fa-plus"></i>
+        </button>
       </form>
-      <main>
-        <div class="btn-group mb-4" role="group">
-          <button
-            type="button"
-            class="btn btn-outline-primary active"
-            data-filter="all"
-          >
-            Toutes
-          </button>
-          <button
-            type="button"
-            class="btn btn-outline-primary"
-            data-filter="todo"
-          >
-            A faire
-          </button>
-          <button
-            type="button"
-            class="btn btn-outline-primary"
-            data-filter="done"
-          >
-            Faites
-          </button>
+
+      <div class="bento-grid">
+        <div class="bento-card" data-category="courses">
+          <div class="card-header">
+            <span class="card-icon"><i class="fa-solid fa-cart-shopping"></i></span>
+            <h2 class="card-title">Courses</h2>
+            <span class="card-count" id="count-courses">0</span>
+          </div>
+          <ul class="task-list" id="list-courses"></ul>
         </div>
 
-        
-  <div class="row">
-    <!-- Colonne Tâches à faire -->
-    <div class="col-md-6">
-      <h5>À faire</h5>
-      <ul class="list-group" id="todo-list"></ul>
+        <div class="bento-card" data-category="prevoir">
+          <div class="card-header">
+            <span class="card-icon"><i class="fa-solid fa-calendar-days"></i></span>
+            <h2 class="card-title">À prévoir</h2>
+            <span class="card-count" id="count-prevoir">0</span>
+          </div>
+          <ul class="task-list" id="list-prevoir"></ul>
+        </div>
+
+        <div class="bento-card" data-category="important">
+          <div class="card-header">
+            <span class="card-icon"><i class="fa-solid fa-star"></i></span>
+            <h2 class="card-title">Important</h2>
+            <span class="card-count" id="count-important">0</span>
+          </div>
+          <ul class="task-list" id="list-important"></ul>
+        </div>
+
+        <div class="bento-card" data-category="oublier">
+          <div class="card-header">
+            <span class="card-icon"><i class="fa-solid fa-lightbulb"></i></span>
+            <h2 class="card-title">Ne pas oublier</h2>
+            <span class="card-count" id="count-oublier">0</span>
+          </div>
+          <ul class="task-list" id="list-oublier"></ul>
+        </div>
+      </div>
     </div>
 
-    <!-- Colonne Tâches faites -->
-    <div class="col-md-6">
-      <h5>Faites</h5>
-      <ul class="list-group" id="done-list"></ul>
-    </div>
-  </div>
-</main>
-
-
-    <script type="text/javascript" src="todo.js"></script>
+    <script src="todo.js"></script>
   </body>
 </html>

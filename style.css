@@ -1,166 +1,454 @@
-/* === Style général de la page === */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f2f5;
-  color: #333;
+:root {
+  --bg-main: #f8f9fc;
+  --bg-card: #ffffff;
+  --text-primary: #1a1d29;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  
+  --accent-courses: #ff6b9d;
+  --accent-prevoir: #8b5cf6;
+  --accent-important: #fbbf24;
+  --accent-oublier: #34d399;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.08);
+  
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #f8f9fc 0%, #eef2ff 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 20px;
+  line-height: 1.6;
 }
 
 .container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-out;
 }
 
-/* === Formulaire === */
-form.d-flex {
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-form input.form-control {
-  flex: 1;
-  padding: 12px 15px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-
-form button.btn-primary {
-  padding: 12px 25px;
-  border-radius: 8px;
-  font-size: 1rem;
-}
-
-/* === Boutons filtre === */
-.btn-group {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.btn-group .btn {
-  margin: 0 5px;
-  border-radius: 8px;
-  transition: background 0.2s, color 0.2s;
-}
-
-.btn-group .btn.active,
-.btn-group .btn:hover {
-  background-color: #7facee;
-  color: #fff;
-}
-
-/* === Conteneur principal avec deux colonnes === */
-.row {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* deux colonnes égales */
-  column-gap: 10px; /* mini espace entre les colonnes */
-  width: 100%; /* prend toute la largeur du conteneur */
-  max-width: 1100px;
-  margin: 20px auto 0;
-}
-
-.col-md-6 {
-  width: 100%; /* chaque colonne prend toute sa "case" dans la grille */
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-  min-height: 400px;
-  transition: transform 0.2s;
-}
-
-
-.col-md-6:hover {
-  transform: translateY(-2px);
-}
-
-/* Background léger pour différencier les colonnes */
-#todo-list {
-  background-color: #e4e1e1;
-}
-
-#done-list {
-  background-color: #ecf0f6;
-}
-
-/* Responsive pour mobile */
-@media (max-width: 768px) {
-  .row {
-    grid-template-columns: 1fr; /* empile les colonnes */
-    column-gap: 0;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* === Titres colonnes === */
-.col-md-6 h5 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #5473ee;
+/* === Header === */
+.header {
+  margin-bottom: 40px;
+  animation: slideDown 0.6s ease-out;
 }
 
-/* === Liste des tâches === */
-ul.list-group {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  flex: 1;
-  overflow-y: auto;
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* === Cartes de tâches === */
-ul.list-group li.todo {
+.title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 12px;
-  padding: 14px 18px;
+  letter-spacing: -0.02em;
+}
+
+.stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 8px 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+/* === Add Task Form === */
+.add-task-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+  padding: 24px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  animation: slideUp 0.6s ease-out 0.1s backwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.task-input {
+  flex: 1;
+  padding: 16px 20px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--bg-main);
+  color: var(--text-primary);
+  transition: var(--transition);
+  outline: none;
+}
+
+.task-input:focus {
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.task-input::placeholder {
+  color: var(--text-muted);
+}
+
+.category-select {
+  padding: 16px 20px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--bg-main);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+  min-width: 180px;
+}
+
+.category-select:hover {
+  border-color: #e5e7eb;
+}
+
+.category-select:focus {
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.add-btn {
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
   display: flex;
   align-items: center;
-  
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
-/* === Checkbox === */
-.form-check-input {
-  margin-right: 12px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  accent-color: #77a5ea; /* couleur du v */
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.add-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-/* Laisser pointer sur le label pour cliquer dessus */
-.todo label.form-check-label {
+.add-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* === Bento Grid === */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  animation: staggerIn 0.8s ease-out 0.2s backwards;
+}
+
+@keyframes staggerIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.bento-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.bento-card:hover::before {
+  opacity: 1;
+}
+
+.bento-card[data-category="courses"] {
+  color: var(--accent-courses);
+}
+
+.bento-card[data-category="prevoir"] {
+  color: var(--accent-prevoir);
+}
+
+.bento-card[data-category="important"] {
+  color: var(--accent-important);
+}
+
+.bento-card[data-category="oublier"] {
+  color: var(--accent-oublier);
+}
+
+/* === Card Header === */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--bg-main);
+}
+
+.card-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
   flex: 1;
+  letter-spacing: -0.01em;
+}
+
+.card-count {
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  background: currentColor;
+  color: white;
+  border-radius: 20px;
+  opacity: 0.9;
+}
+
+/* === Task List === */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.task-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 10px;
+}
+
+.task-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* === Task Item === */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg-main);
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  animation: taskSlideIn 0.4s ease-out;
+}
+
+@keyframes taskSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.task-item:hover {
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transform: translateX(4px);
+}
+
+.task-checkbox {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: currentColor;
+  margin: 0;
+}
+
+.task-label {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--text-primary);
   cursor: pointer;
   user-select: none;
-  font-size: 1rem;
+  transition: var(--transition);
 }
 
-/* === Tâches faites === */
-.todo input.form-check-input:checked + label.form-check-label {
-  text-decoration: none;
-  color: #999;
-  opacity: 0.8;
+.task-item.done .task-label {
+  text-decoration: line-through;
+  color: var(--text-muted);
+  opacity: 0.6;
 }
 
-/* === Bouton supprimer === */
-.todo .btn-danger {
-  background-color: #ff6b6b;
+.task-item.done {
+  opacity: 0.7;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.delete-btn {
+  width: 32px;
+  height: 32px;
   border: none;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 6px;
-  transition: background 0.2s, transform 0.2s;
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  opacity: 0;
 }
 
-.todo .btn-danger:hover {
-  background-color: #e90e0ebf;
-  transform: scale(1.05);
+.task-item:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  background: #ef4444;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  body {
+    padding: 16px;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .add-task-form {
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .category-select {
+    width: 100%;
+  }
+  
+  .add-btn {
+    width: 100%;
+    height: 50px;
+  }
+  
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .delete-btn {
+    opacity: 1;
+  }
+}
+
+/* === Empty State === */
+.task-list:empty::after {
+  content: 'Aucune tâche pour le moment';
+  display: block;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 40px 20px;
+  font-style: italic;
 }
